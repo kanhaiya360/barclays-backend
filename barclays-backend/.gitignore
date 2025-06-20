@@ -1,0 +1,8 @@
+# Eclipse/STS
+*.classpath
+*.project
+.settings/
+.factorypath
+
+# Maven
+target/

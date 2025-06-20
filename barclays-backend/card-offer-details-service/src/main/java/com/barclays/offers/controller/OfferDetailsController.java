@@ -13,7 +13,7 @@ import com.barclays.offers.service.IOffersService;
 import com.barclays.offers.validator.OfferDetailsValidator;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class OfferDetailsController {
 	@Autowired
 	private OfferDetailsValidator offerDetailsValidator;
@@ -28,7 +28,6 @@ public class OfferDetailsController {
 		@RequestHeader(name = "corelationId", required=false)	String corelationId,
 		@RequestHeader(name = "authToken", required=false)	String authToken) {
 		
-//	validate OffersRequest 
 		OffersRequest offersRequest=new OffersRequest();
 		offersRequest.setCardNum(cardNum);
 		offersRequest.setClientId(clientId);
@@ -36,8 +35,11 @@ public class OfferDetailsController {
 		offersRequest.setMsgTs(msgTs);
 		offersRequest.setCorelationId(corelationId);
 		offersRequest.setAuthToken(authToken);
-		OffersResponse offersResponse = offersService.getOffers(offersRequest);
 		
+//	validate OffersRequest 
+		offerDetailsValidator.validateRequest(offersRequest);
+		
+		OffersResponse offersResponse = offersService.getOffers(offersRequest);
 		return offersResponse;
 	}
 }

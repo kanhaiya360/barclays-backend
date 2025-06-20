@@ -43,6 +43,6 @@ public class OffersServiceImpl implements IOffersService{
 		OffersDaoResponse offersDaoResponse = offersDao.getOffers(daoRequest);
 		
 		OffersResponse offersResponse=offersResponseBuilder.buildOffersResponse(offersDaoResponse,cardVerifyResposne,enrollmentResponse);
-		return null;
+		return offersResponse;
 	}
 }

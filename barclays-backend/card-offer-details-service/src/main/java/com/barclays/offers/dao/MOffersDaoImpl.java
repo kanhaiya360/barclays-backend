@@ -43,7 +43,7 @@ public class MOffersDaoImpl implements IOffersDao{
 	    OffersDaoResponse response = new OffersDaoResponse();
 	    response.setRespCode(dbRespCode);
 	    response.setRespMsg(dbRespMsg);
-	    response.setOffersDetailsDaos(offerList);
+	    response.setOfferDaoList(offerList);
 
 	    return response;
 	}

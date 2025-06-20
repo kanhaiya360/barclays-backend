@@ -1,11 +1,10 @@
 package com.barclays.offers.builder;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.barclays.offers.dao.OffersDetailsDao;
 import com.barclays.offers.model.CardVerifyResposne;
 import com.barclays.offers.model.EnrollmentResponse;
 import com.barclays.offers.model.OfferDetails;
@@ -18,8 +17,8 @@ public class OffersResponseBuilder {
 			CardVerifyResposne cardVerifyResposne, EnrollmentResponse enrollmentResponse) {
 		// TODO Auto-generated method stub
 		OffersResponse offersResponse=new OffersResponse();
-		List<OfferDetails> details=new ArrayList<>();
-		for(OffersDetailsDao detailsDao: offersDaoResponse.getOffersDetailsDaos()) {
+		List<OfferDetails> details=offersDaoResponse.getOfferDaoList().stream()
+				.map(detailsDao->{
 			OfferDetails offerDetails=new OfferDetails();
 			offerDetails.setName(detailsDao.getName());
 			offerDetails.setOfferId(detailsDao.getOfferId());
@@ -27,8 +26,11 @@ public class OffersResponseBuilder {
 			offerDetails.setDesc(detailsDao.getDesc());
 			offerDetails.setImageUrl(detailsDao.getImageUrl());
 			offerDetails.setStatus(detailsDao.getStatus());
-			details.add(offerDetails);
-		}
+		return offerDetails;
+		}).collect(Collectors.toList());
+		
+			
+		
 		offersResponse.setOffers(details);
 		
 		return offersResponse;

@@ -1,5 +1,16 @@
 package com.barclays.offers.exception;
 
-public class BusinessException {
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
+@ToString
+public class BusinessException extends Exception{
+	private String respCode;
+	private String respMsg;
+	public BusinessException(String respCode, String respMsg) {
+		super();
+		this.respCode = respCode;
+		this.respMsg = respMsg;
+	}
 }
