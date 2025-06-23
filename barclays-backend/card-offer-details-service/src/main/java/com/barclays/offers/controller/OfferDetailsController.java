@@ -1,6 +1,8 @@
 package com.barclays.offers.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -14,6 +16,7 @@ import com.barclays.offers.validator.OfferDetailsValidator;
 
 @RestController
 @RequestMapping("/api/v1/")
+
 public class OfferDetailsController {
 	@Autowired
 	private OfferDetailsValidator offerDetailsValidator;
@@ -21,7 +24,7 @@ public class OfferDetailsController {
 	private IOffersService offersService;
 
 	@GetMapping("offers/{cardnumber}")
-	OffersResponse getOffers(@PathVariable("cardnumber") String cardNum,
+	ResponseEntity<OffersResponse>  getOffers(@PathVariable("cardnumber") String cardNum,
 		@RequestHeader(name = "clientId", required=false)	String clientId,
 		@RequestHeader(name = "channelId", required=false)	String channelId,
 		@RequestHeader(name = "msgTs", required=false)	String msgTs,
@@ -40,6 +43,6 @@ public class OfferDetailsController {
 		offerDetailsValidator.validateRequest(offersRequest);
 		
 		OffersResponse offersResponse = offersService.getOffers(offersRequest);
-		return offersResponse;
+		 return new ResponseEntity<>(offersResponse, HttpStatus.OK);
 	}
 }

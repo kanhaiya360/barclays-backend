@@ -1,5 +1,10 @@
 package com.barclays.card.verify.model;
 
-public class EnrollmentResponse {
+import lombok.Data;
 
+@Data
+public class EnrollmentResponse {
+	private String status;
+	private String respCode;
+	private String respMsg;
 }

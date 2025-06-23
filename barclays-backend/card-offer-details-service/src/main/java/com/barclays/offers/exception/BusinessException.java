@@ -5,7 +5,11 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class BusinessException extends Exception{
+public class BusinessException extends RuntimeException{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String respCode;
 	private String respMsg;
 	public BusinessException(String respCode, String respMsg) {
